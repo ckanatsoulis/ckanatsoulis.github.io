@@ -142,7 +142,6 @@ include:                ['_pages']
 exclude:                [vendor]
 
 plugins:
-  - jekyll-archives
   - jekyll-diagrams
   - jekyll-email-protect
   - jekyll-feed
