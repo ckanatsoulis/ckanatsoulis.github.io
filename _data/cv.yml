@@ -1,189 +1,102 @@
-cv:
-  name: Albert Einstein
-  label: Scientist
-  email: einstein@example.com
-  location: Princeton, NJ
-  image: ""
-  summary: A German-born theoretical physicist, widely ranked among the greatest and most influential scientists of all time
+- title: General Information
+  type: map
+  contents:
+    - name: Full Name
+      value: Charilaos I. Kanatsoulis
+    - name: Affiliation
+      value: Stanford University · SNAP Group · Department of Computer Science
+    - name: Languages
+      value: Greek (native), English (professional)
 
-  social_networks:
-    - network: X
-      username: AlbertEinstein
-    - network: GitHub
-      username: example
-    - network: LinkedIn
-      username: example
+- title: Education
+  type: time_table
+  contents:
+    - title: PhD, Electrical & Computer Engineering
+      institution: University of Minnesota, Twin Cities
+      year: 2014 – 2020
+      description:
+        - "Thesis: Tensor Methods for Signal Reconstruction and Network Embedding."
+        - "Advisor: Prof. Nikolaos Sidiropoulos."
+    - title: Diploma (Dipl.-Ing.), Electrical & Computer Engineering
+      institution: National Technical University of Athens
+      year: 2007 – 2014
 
-  address:
-    street: 2712 Broadway St
-    city: San Francisco
-    region: California
-    postalCode: CA 94115
-    countryCode: US
+- title: Experience
+  type: time_table
+  contents:
+    - title: Research Scientist
+      institution: Stanford University · SNAP Group (PI Jure Leskovec)
+      year: 2024 – present
+      description:
+        - Leading ML research at the SNAP Group.
+        - Designing graph neural networks, graph foundation models, and large-scale benchmarks for forecasting over relational databases.
+        - Developing knowledge-graph models for text-to-KG extraction with LLMs and multi-modal KG reasoning.
+        - Building transformer architectures for single-cell transcriptomics, gene-regulatory networks, and protein modeling.
+        - "Industry-academic collaborations with NVIDIA, SAP, Kumo.AI, and Chan Zuckerberg Initiative."
+        - "Instructor for CS224W (Machine Learning with Graphs) and CS246 (Mining Massive Datasets)."
+    - title: Postdoctoral Researcher
+      institution: University of Pennsylvania · Alelab (PI Alejandro Ribeiro)
+      year: 2021 – 2023
+      description:
+        - GNN design and expressivity (ICLR 2024, ICLR 2025).
+        - Parameter-efficient tensor adaptation methods for LLMs, vision, and protein models (LoRTA).
+        - Decentralized GNN policies for multi-agent coordination.
+        - Instructor for ESE5140 Graph Neural Networks.
+    - title: Research Scientist
+      institution: Sentera, Inc.
+      year: 2020 – 2021
+      description:
+        - Deep-learning super-resolution pipelines for agricultural UAV / satellite imaging.
+        - Shipped models to the production imaging stack.
 
-  sections:
-    Education:
-      - institution: University of Zurich
-        location: Zurich, Switzerland
-        url: https://www.uzh.ch/
-        area: Physics
-        studyType: PhD
-        start_date: 1900
-        end_date: 1905
-        score: ""
-        courses: "Theory of Relativity"
-        highlights:
-          - Description 1.
-          - Description 2.
+- title: Selected Awards
+  type: time_table
+  contents:
+    - year: 2025
+      items:
+        - "Best Paper Award — KDD Temporal Graph Learning Workshop (Relational Graph Transformer)."
+    - year: 2023
+      items:
+        - "Best Student Paper — IEEE CAMSAP."
+        - "Best Student Paper Finalist — IEEE Asilomar Conference."
+    - year: 2014
+      items:
+        - "ADC Graduate Fellowship in Wireless & Networking Technology, U. Minnesota."
 
-      - institution: Eidgenössische Technische Hochschule
-        location: Zurich, Switzerland
-        area: Physics
-        studyType: Federal teaching diploma
-        start_date: 1896
-        end_date: 1900
-        highlights:
-          - Description 1.
-          - Description 2.
+- title: Open Source
+  type: list
+  contents:
+    - "<a href='https://github.com/stair-lab/kg-gen'>KGGen</a> — text-to-knowledge-graph extraction with LLMs (NeurIPS 2025). 1.1k+ stars."
+    - "<a href='https://relbench.stanford.edu/'>RelBench v2</a> — community-standard benchmark for relational deep learning. 350+ stars. Adopted by NVIDIA, SAP, Kumo.AI."
 
-    Experience:
-      - company: Institute for Advanced Study, Princeton University
-        position: Professor of Theoretical Physics
-        location: Princeton University, NJ
-        start_date: 1933
-        end_date: 1955
-        summary: Teaching at Palmer Physical Laboratory (now 302 Frist Campus Center). While not a professor at Princeton, I associated with the physics professors and continued to give lectures on campus.
-        highlights:
-          - Relativity
-          - Description 2.
+- title: Workshop & Tutorial Organization
+  type: list
+  contents:
+    - "ICML 2026 — Graph Foundation Models workshop."
+    - "NeurIPS 2025 — New Perspectives in Advancing Graph Machine Learning workshop."
+    - "LoG 2025 — RDL: Foundations, Advanced Methods and Hands-on Development."
+    - "KDD 2025 — Relational Deep Learning Tutorial."
+    - "Stanford Graph Learning Workshop (2024, 2025)."
+    - "ICASSP 2023 — Graph Neural Networks short course."
 
-      - company: California Institute of Technology
-        position: Visiting Professor
-        location: Pasadena, California, US
-        start_date: 1933
-        end_date: 1933
-        highlights:
-          - Description 1.
-          - Description 2.
+- title: Service
+  type: list
+  contents:
+    - "Area Chair — AAAI, KDD, ICML Workshops."
+    - "Reviewer — NeurIPS, ICLR, ICML, KDD, IEEE Transactions on Signal Processing."
 
-      - company: Kaiser Wilhelm Institute for Physics
-        position: Director
-        location: Berlin, Germany
-        start_date: 1917
-        end_date: 1933
-
-      - company: Karl-Ferdinand University
-        position: Professor of Theoretical Physics
-        location: Prague, Czechoslovakia
-        start_date: 1911
-        end_date: 1917
-
-      - company: University of Zurich
-        position: Associate Professor of Theoretical Physics
-        location: Zurich, Switzerland
-        start_date: 1909
-        end_date: 1911
-
-    Volunteer:
-      - company: People's Climate March
-        position: Lead Organizer
-        location: Zurich, Switzerland
-        start_date: 2014-04-01
-        end_date: 2015-07-01
-        summary: Lead organizer for the New York City branch of the People's Climate March, the largest climate march in history.
-        highlights:
-          - "Awarded 'Climate Hero' award by Greenpeace for my efforts organizing the march."
-          - "Men of the year 2014 by Time magazine"
-
-    Awards:
-      - title: Nobel Prize in Physics
-        authors:
-          - "Royal Swedish Academy of Sciences"
-        date: 1921-11-01
-        awarder: Royal Swedish Academy of Sciences
-        url: https://www.nobelprize.org/prizes/physics/1921/einstein/biographical/
-        summary: The Nobel Prizes are five separate prizes that, according to Alfred Nobel's will of 1895, are awarded to 'those who, during the preceding year, have conferred the greatest benefit to humankind.'
-
-      - title: Max Planck Medal
-        authors:
-          - "German Physical Society"
-        date: 2029
-        awarder: German Physical Society
-        summary: Awarded for outstanding scientific achievement
-
-    Publications:
-      - title: Zur Elektrodynamik bewegter Körper
-        authors:
-          - Albert Einstein
-        publisher: Annalen der Physik
-        releaseDate: 1905-06-30
-        url: https://en.wikisource.org/wiki/Translation:On_the_Electrodynamics_of_Moving_Bodies
-        summary: It concerned an interpretation of the Michelson–Morley experiment and the properties of light and time. Special relativity incorporates the principle that the speed of light is the same for all inertial observers regardless of the state of motion of the source.
-
-      - title: Über einen die Erzeugung und Verwandlung des Lichtes betreffenden heuristischen Gesichtspunkt
-        authors:
-          - Albert Einstein
-        publisher: Annalen der Physik
-        releaseDate: 1905-03-18
-        url: https://de.wikisource.org/wiki/Über_einen_die_Erzeugung_und_Verwandlung_des_Lichtes_betreffenden_heuristischen_Gesichtspunkt
-        summary: In the second paper, he applied the quantum theory to light to explain the photoelectric effect. In particular, he used the idea of light quanta (photons) to explain experimental results, but stressed the importance of the experimental results. The importance of his work on the photoelectric effect earned him the Nobel Prize in Physics in 1921.
-
-      - title: Die Grundlage der allgemeinen Relativitätstheorie
-        authors:
-          - Albert Einstein
-        publisher: Annalen der Physik
-        releaseDate: 1916-03-20
-        url: https://de.wikisource.org/wiki/Die_Grundlage_der_allgemeinen_Relativitätstheorie
-        summary: The publication of the theory of general relativity made him internationally famous. He was professor of physics at the universities of Zurich (1909–1911) and Prague (1911–1912), before he returned to ETH Zurich (1912–1914).
-
-    Skills:
-      - name: Physics
-        level: Master
-        icon: fa-solid fa-hashtag
-        keywords: "Quantum Mechanics, Quantum Computing, Quantum Information, Quantum Cryptography, Quantum Communication, Quantum Teleportation"
-
-    Languages:
-      - name: German
-        summary: "Native speaker"
-
-      - name: English
-        summary: "Fluent"
-
-    Interests:
-      - name: Physics
-        icon: fa-solid fa-tag
-        keywords: "Quantum Mechanics, Quantum Computing, Quantum Information, Quantum Cryptography, Quantum Communication, Quantum Teleportation"
-
-    Certificates:
-      - name: Machine Learning
-        date: 2018-01-01
-        issuer: Stanford University
-        icon: fa-solid fa-location-dot
-
-      - name: Quantum Computing
-        date: 2018-01-01
-        issuer: Stanford University
-        icon: fa-solid fa-tag
-
-      - name: Quantum Information
-        date: 2018-01-01
-        issuer: Stanford University
-        icon: fa-solid fa-envelope
-
-    Projects:
-      - name: Quantum Computing
-        summary: Quantum computing is the use of quantum-mechanical phenomena such as superposition and entanglement to perform computation. Computers that perform quantum computations are known as quantum computers.
-        highlights:
-          - Quantum Teleportation
-          - Quantum Cryptography
-        start_date: 2018-01-01
-        end_date: 2018-01-01
-
-    References:
-      - name: Professor John Doe
-        icon: fa-solid fa-laptop
-        reference: Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam condimentum, diam quis convallis euismod, arcu mi ullamcorper lorem, a vestibulum nunc magna at sem. Sed in risus ac felis varius blandit.
-
-      - name: Professor Jane Smith
-        icon: fa-solid fa-thumbtack
-        reference: Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam condimentum, diam quis convallis euismod, arcu mi ullamcorper lorem, a vestibulum nunc magna at sem. Sed in risus ac felis varius blandit.
+- title: Skills
+  type: nested_list
+  contents:
+    - title: Programming & tooling
+      items:
+        - "Python (PyTorch, PyTorch Lightning, PyG, DGL, NetworkX, scikit-learn, NumPy/SciPy, Pandas)"
+        - "JAX/Flax familiar"
+        - "MATLAB (CVX, Yalmip)"
+    - title: Research areas
+      items:
+        - "Foundation models for structured data"
+        - "Graph neural networks and graph foundation models"
+        - "Knowledge graphs and multi-modal language models"
+        - "Parameter-efficient adaptation of large pretrained models"
+        - "Biomedical and life-science AI"

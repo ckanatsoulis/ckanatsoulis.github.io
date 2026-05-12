@@ -2,33 +2,28 @@
 layout: about
 title: about
 permalink: /
-subtitle: <a href='#'>Affiliations</a>. Address. Contacts. Motto. Etc.
+subtitle: >
+  Research Scientist · <a href="https://snap.stanford.edu/" target="_blank">Stanford SNAP Group</a> · <a href="mailto:charilaos@cs.stanford.edu">charilaos@cs.stanford.edu</a>
 
 profile:
   align: right
   image: prof_pic.jpg
-  image_circular: false # crops the image to make it circular
+  image_circular: false
   more_info: >
-    <p>555 your office number</p>
-    <p>123 your address street</p>
-    <p>Your City, State 12345</p>
+    <p>William Gates Computer Science Building</p>
+    <p>353 Jane Stanford Way, 412</p>
+    <p>Stanford, CA 94305</p>
 
-selected_papers: true # includes a list of papers marked as "selected={true}"
-social: true # includes social icons at the bottom of the page
-
-announcements:
-  enabled: true # includes a list of news items
-  scrollable: true # adds a vertical scroll bar if there are more than 3 news items
-  limit: 5 # leave blank to include all the news in the `_news` folder
-
-latest_posts:
-  enabled: true
-  scrollable: true # adds a vertical scroll bar if there are more than 3 new posts items
-  limit: 3 # leave blank to include all the blog posts
+selected_papers: true
+news: true
+social: true
 ---
 
-Write your biography here. Tell the world about yourself. Link to your favorite [subreddit](https://www.reddit.com). You can put a picture in, too. The code is already in, just name your picture `prof_pic.jpg` and put it in the `img/` folder.
+I am a Research Scientist in the [Department of Computer Science](https://www.cs.stanford.edu/) at [Stanford University](https://www.stanford.edu/), working with [Prof. Jure Leskovec](https://cs.stanford.edu/people/jure/) at the [SNAP group](https://snap.stanford.edu/). I am also an instructor for [CS224W (Machine Learning with Graphs)](https://web.stanford.edu/class/cs224w/) and [CS246 (Mining Massive Datasets)](https://web.stanford.edu/class/cs246/).
 
-Put your address / P.O. box / other info right below your picture. You can also disable any of these elements by editing `profile` property of the YAML header of your `_pages/about.md`. Edit `_bibliography/papers.bib` and Jekyll will render your [publications page](/al-folio/publications/) automatically.
+Before Stanford, I was a postdoctoral researcher at the [Department of Electrical and Systems Engineering](https://www.ese.upenn.edu) at the [University of Pennsylvania](https://www.upenn.edu), working with Prof. [Alejandro Ribeiro](https://alelab.seas.upenn.edu/alejandro-ribeiro). I received my Ph.D. in [Electrical and Computer Engineering](http://www.ece.umn.edu) from the [University of Minnesota](http://www.umn.edu), advised by Prof. [Nikos Sidiropoulos](http://www.ece.virginia.edu/~nds5j/). Earlier, I earned my Diploma in [Electrical and Computer Engineering](http://ece.ntua.gr) from the [National Technical University of Athens](http://www.ntua.gr).
 
-Link to your social media connections, too. This theme is set up to use [Font Awesome icons](https://fontawesome.com/) and [Academicons](https://jpswalsh.github.io/academicons/), like the ones below. Add your Facebook, Twitter, LinkedIn, Google Scholar, or just disable all of them.
+**Research interests.**
+I build **foundation models for structured data** — relational databases, graphs, single-cell transcriptomics, and protein sequences — and develop **parameter-efficient methods for adapting large pretrained models**. My recent work spans graph neural networks and graph foundation models, multi-modal language and knowledge-graph models, structured large-model pretraining, relational AI-agents, and biomedical AI. I lead industry-academic collaborations with [NVIDIA](https://www.nvidia.com/), [Microsoft](https://www.microsoft.com/research), [SAP](https://www.sap.com/), [Kumo.AI](https://kumo.ai/), and the [Chan Zuckerberg Initiative](https://chanzuckerberg.com/).
+
+**Get in touch.** Email is the best way — [charilaos@cs.stanford.edu](mailto:charilaos@cs.stanford.edu). You can also find me on [Google Scholar](https://scholar.google.com/citations?user=8EGcDkUAAAAJ), [GitHub](https://github.com/marhar19), and [LinkedIn](https://www.linkedin.com/in/ckanatsoulis).
