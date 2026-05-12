@@ -11,7 +11,7 @@ profile:
   image_circular: false
   more_info: >
     <p>William Gates Computer Science Building</p>
-    <p>353 Jane Stanford Way, 412</p>
+    <p>353 Jane Stanford Way, 349</p>
     <p>Stanford, CA 94305</p>
 
 news: true
