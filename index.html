@@ -1,0 +1,906 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Charilaos I. Kanatsoulis</title>
+  <meta name="description" content="Research Scientist at Stanford SNAP Group. Foundation models for structured data, graph neural networks, knowledge graphs, biomedical AI." />
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E👋%3C/text%3E%3C/svg%3E" />
+
+  <!-- Set theme before paint to avoid a flash of wrong color scheme -->
+  <script>
+    (function () {
+      try {
+        var stored = localStorage.getItem('theme');
+        var prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+        var theme = stored || (prefersDark ? 'dark' : 'light');
+        document.documentElement.setAttribute('data-theme', theme);
+      } catch (e) {
+        document.documentElement.setAttribute('data-theme', 'light');
+      }
+    })();
+  </script>
+
+  <style>
+    :root {
+      --accent: #8C1515;       /* Stanford cardinal */
+      --accent-soft: #F4E5E5;
+      --accent-dark: #5E0F0F;
+      --venue: #B22222;
+      --text: #1a1a1a;
+      --muted: #666;
+      --bg: #ffffff;
+      --bg-soft: #f7f7f7;
+      --border: #e2e2e2;
+      --card-shadow: 0 1px 3px rgba(0,0,0,0.04);
+      --max-width: 980px;
+    }
+
+    /* Dark theme. Applied when html has data-theme="dark"
+       (set explicitly by the toggle, or by inline script that reads system pref) */
+    html[data-theme="dark"] {
+      --accent: #D77676;
+      --accent-soft: #2b1a1a;
+      --accent-dark: #B85555;
+      --venue: #F08585;
+      --text: #e6e6e6;
+      --muted: #9a9a9a;
+      --bg: #0d1117;
+      --bg-soft: #161b22;
+      --border: #2a2f37;
+      --card-shadow: 0 1px 3px rgba(0,0,0,0.4);
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Helvetica Neue", Arial, sans-serif;
+      color: var(--text);
+      background: var(--bg);
+      line-height: 1.55;
+      margin: 0;
+      padding: 0;
+      font-size: 16px;
+    }
+
+    a { color: var(--accent); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+
+    main { max-width: var(--max-width); margin: 0 auto; padding: 0 24px; }
+
+    /* ====== Header / Sticky nav ====== */
+    header.site {
+      border-bottom: 1px solid var(--border);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      backdrop-filter: blur(8px);
+      background: rgba(255,255,255,0.92);
+    }
+    html[data-theme="dark"] header.site { background: rgba(13,17,23,0.92); }
+
+    /* ====== Theme toggle button ====== */
+    .theme-toggle {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 32px;
+      height: 32px;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      background: var(--bg-soft);
+      color: var(--text);
+      cursor: pointer;
+      padding: 0;
+      margin-left: 4px;
+      transition: color 0.15s ease, border-color 0.15s ease, background 0.15s ease;
+    }
+    .theme-toggle:hover {
+      color: var(--accent);
+      border-color: var(--accent);
+    }
+    .theme-toggle svg { width: 16px; height: 16px; display: block; }
+    /* In light mode show moon (click to go dark). In dark mode show sun. */
+    .theme-toggle .icon-sun { display: none; }
+    .theme-toggle .icon-moon { display: block; }
+    html[data-theme="dark"] .theme-toggle .icon-moon { display: none; }
+    html[data-theme="dark"] .theme-toggle .icon-sun { display: block; }
+    header.site nav {
+      max-width: var(--max-width);
+      margin: 0 auto;
+      padding: 12px 24px;
+      display: flex;
+      gap: 22px;
+      align-items: center;
+      flex-wrap: wrap;
+      font-size: 14px;
+    }
+    header.site .name {
+      font-weight: 700;
+      color: var(--text);
+      margin-right: auto;
+      font-size: 15px;
+    }
+    header.site a { color: var(--text); }
+    header.site a:hover { color: var(--accent); text-decoration: none; }
+
+    /* ====== Sections ====== */
+    section { padding: 48px 0 24px; }
+    section + section { border-top: 1px solid var(--border); }
+    h1 { font-size: 2.2rem; margin: 0 0 8px; letter-spacing: -0.5px; font-weight: 700; }
+    h2 {
+      font-size: 0.95rem;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      color: var(--accent);
+      margin: 0 0 28px;
+      font-weight: 700;
+    }
+    h3 { font-size: 1.1rem; margin: 14px 0 2px; }
+    p { margin: 10px 0; }
+    .muted { color: var(--muted); }
+
+    /* ====== Hero ====== */
+    .hero {
+      display: grid;
+      grid-template-columns: 1fr 220px;
+      gap: 44px;
+      align-items: start;
+      padding-top: 56px;
+      border-top: 0;
+    }
+    @media (max-width: 760px) {
+      .hero { grid-template-columns: 1fr; }
+    }
+    .hero img.profile {
+      width: 220px;
+      height: 220px;
+      border-radius: 12px;
+      object-fit: cover;
+      border: 1px solid var(--border);
+    }
+    .hero .photo-placeholder {
+      width: 220px;
+      height: 220px;
+      border-radius: 12px;
+      background: var(--accent-soft);
+      color: var(--accent);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 4rem;
+      border: 1px dashed var(--border);
+    }
+    .hero .role {
+      color: var(--muted);
+      font-size: 1.05rem;
+      margin-top: 4px;
+    }
+    .hero .links {
+      margin-top: 14px;
+      font-size: 0.95rem;
+    }
+    .hero .links a { margin-right: 14px; }
+
+    /* ====== Social icons (Zoe Piran style, flat, inline) ====== */
+    .social-icons {
+      display: flex;
+      gap: 18px;
+      margin-top: 18px;
+      align-items: center;
+      flex-wrap: wrap;
+    }
+    .social-icons a {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--muted);
+      background: none;
+      border: none;
+      padding: 0;
+      transition: color 0.15s ease, transform 0.15s ease;
+    }
+    .social-icons a:hover {
+      color: var(--accent);
+      text-decoration: none;
+      transform: translateY(-1px);
+    }
+    .social-icons svg {
+      width: 22px;
+      height: 22px;
+      display: block;
+    }
+
+    /* ====== News ====== */
+    .news {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      max-height: 320px;
+      overflow-y: auto;
+      padding-left: 14px;
+      border-left: 3px solid var(--accent-soft);
+    }
+    .news li {
+      margin: 0 0 10px;
+      font-size: 0.94rem;
+    }
+    .news .date {
+      color: var(--muted);
+      font-weight: 600;
+      margin-right: 8px;
+    }
+
+    /* ====== Tabs ====== */
+    .tabs {
+      display: flex;
+      gap: 4px;
+      margin-bottom: 22px;
+      border-bottom: 1px solid var(--border);
+      flex-wrap: wrap;
+    }
+    .tabs button {
+      background: none;
+      border: 0;
+      padding: 10px 14px;
+      font-size: 0.92rem;
+      color: var(--muted);
+      cursor: pointer;
+      border-bottom: 2px solid transparent;
+      margin-bottom: -1px;
+      font-family: inherit;
+      font-weight: 600;
+    }
+    .tabs button.active {
+      color: var(--accent);
+      border-bottom-color: var(--accent);
+    }
+    .tabs button:hover { color: var(--accent); }
+    .tab-panel { display: none; }
+    .tab-panel.active { display: block; }
+
+    /* ====== Paper cards ====== */
+    .paper-card {
+      display: grid;
+      grid-template-columns: 160px 1fr;
+      gap: 22px;
+      padding: 18px 0;
+      border-bottom: 1px solid var(--border);
+      align-items: start;
+    }
+    .paper-card:last-child { border-bottom: 0; }
+    @media (max-width: 700px) {
+      .paper-card { grid-template-columns: 1fr; }
+    }
+    .paper-img {
+      width: 160px;
+      height: 110px;
+      border-radius: 8px;
+      object-fit: cover;
+      border: 1px solid var(--border);
+    }
+    .paper-img-placeholder {
+      width: 160px;
+      height: 110px;
+      border-radius: 8px;
+      background: linear-gradient(135deg, var(--accent-soft), var(--bg-soft));
+      color: var(--accent);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 700;
+      font-size: 1.15rem;
+      border: 1px solid var(--border);
+      text-align: center;
+      padding: 8px;
+      letter-spacing: 0.5px;
+    }
+    .paper-title { font-weight: 700; font-size: 1.02rem; margin: 0 0 4px; line-height: 1.35; }
+    .paper-venue {
+      color: var(--venue);
+      font-weight: 700;
+      font-size: 0.9rem;
+      margin-bottom: 4px;
+    }
+    .paper-venue .award {
+      background: var(--venue);
+      color: white;
+      padding: 1px 6px;
+      border-radius: 3px;
+      margin-left: 6px;
+      font-size: 0.78rem;
+    }
+    .paper-authors {
+      color: var(--muted);
+      font-size: 0.9rem;
+      margin: 2px 0 8px;
+    }
+    .paper-authors strong { color: var(--text); }
+    .paper-summary { font-size: 0.92rem; margin: 6px 0; }
+    .paper-summary strong { color: var(--accent-dark); }
+    .paper-links { margin-top: 8px; }
+    .paper-links a {
+      display: inline-block;
+      padding: 2px 9px;
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      font-size: 0.78rem;
+      margin-right: 5px;
+      color: var(--muted);
+      font-weight: 500;
+    }
+    .paper-links a:hover { color: var(--accent); border-color: var(--accent); text-decoration: none; }
+    .paper-link-note {
+      display: inline-block;
+      padding: 2px 9px;
+      font-size: 0.78rem;
+      color: var(--muted);
+      font-style: italic;
+    }
+
+    /* ====== Education cards ====== */
+    .edu-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+    }
+    @media (max-width: 700px) { .edu-grid { grid-template-columns: 1fr; } }
+    .edu-card {
+      padding: 16px;
+      background: var(--bg-soft);
+      border-radius: 8px;
+      border: 1px solid var(--border);
+    }
+    .edu-card h3 { margin: 0 0 4px; font-size: 1rem; }
+    .edu-card .when { color: var(--muted); font-size: 0.85rem; margin-bottom: 6px; }
+    .edu-card p { margin: 4px 0; font-size: 0.9rem; }
+
+    /* ====== Course cards (Teaching) ====== */
+    .course-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+      margin-bottom: 18px;
+    }
+    @media (max-width: 760px) {
+      .course-grid { grid-template-columns: 1fr; }
+    }
+    .course-card {
+      padding: 18px;
+      background: var(--bg-soft);
+      border-radius: 10px;
+      border: 1px solid var(--border);
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+      transition: border-color 0.15s ease, transform 0.15s ease;
+    }
+    .course-card:hover {
+      border-color: var(--accent);
+      transform: translateY(-1px);
+    }
+    .course-card .course-code {
+      color: var(--accent);
+      font-weight: 700;
+      font-size: 0.85rem;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+    }
+    .course-card .course-title {
+      font-weight: 700;
+      font-size: 1rem;
+      margin: 2px 0 6px;
+    }
+    .course-card .course-title a { color: var(--text); }
+    .course-card .course-title a:hover { color: var(--accent); text-decoration: none; }
+    .course-card .course-meta {
+      color: var(--muted);
+      font-size: 0.88rem;
+      margin-top: auto;
+      padding-top: 6px;
+    }
+
+    /* Compact info rows (talks, awards) */
+    .info-row { margin: 8px 0; font-size: 0.95rem; }
+    .info-row .label {
+      color: var(--accent);
+      font-weight: 700;
+      font-size: 0.78rem;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      display: block;
+      margin-bottom: 4px;
+    }
+    .see-cv {
+      margin-top: 18px;
+      font-size: 0.9rem;
+      color: var(--muted);
+    }
+
+    /* ====== Footer ====== */
+    footer.site {
+      border-top: 1px solid var(--border);
+      padding: 28px 0;
+      text-align: center;
+      color: var(--muted);
+      font-size: 0.82rem;
+    }
+
+    code { background: var(--bg-soft); padding: 1px 5px; border-radius: 3px; font-size: 0.85em; }
+  </style>
+</head>
+
+<body>
+
+<header class="site">
+  <nav>
+    <span class="name">Charilaos I. Kanatsoulis</span>
+    <a href="#about">About</a>
+    <a href="#news">News</a>
+    <a href="#research">Research</a>
+    <!-- <a href="#education">Education</a> -->
+    <a href="#teaching">Teaching</a>
+    <a href="cv.html">CV</a>
+    <a href="https://scholar.google.com/citations?user=8EGcDkUAAAAJ" target="_blank" rel="noopener">Scholar</a>
+    <button id="theme-toggle" class="theme-toggle" type="button" aria-label="Toggle dark mode" title="Toggle dark mode">
+      <!-- Moon (shown in light mode → click to go dark) -->
+      <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" xmlns="http://www.w3.org/2000/svg">
+        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
+      </svg>
+      <!-- Sun (shown in dark mode → click to go light) -->
+      <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" xmlns="http://www.w3.org/2000/svg">
+        <circle cx="12" cy="12" r="4"/>
+        <path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/>
+      </svg>
+    </button>
+  </nav>
+</header>
+
+<script>
+  (function () {
+    var btn = document.getElementById('theme-toggle');
+    if (!btn) return;
+    btn.addEventListener('click', function () {
+      var current = document.documentElement.getAttribute('data-theme') === 'dark' ? 'dark' : 'light';
+      var next = current === 'dark' ? 'light' : 'dark';
+      document.documentElement.setAttribute('data-theme', next);
+      try { localStorage.setItem('theme', next); } catch (e) {}
+    });
+  })();
+</script>
+
+<main>
+
+  <!-- ============================ HERO ============================ -->
+  <section id="about" class="hero">
+    <div>
+      <h1>Charilaos I. Kanatsoulis</h1>
+      <div class="role">Research Scientist · <a href="https://snap.stanford.edu/" target="_blank" rel="noopener">Stanford SNAP Group</a></div>
+
+      <p style="margin-top: 16px;">
+        I am a Research Scientist in the <a href="https://www.cs.stanford.edu/" target="_blank" rel="noopener">Department of Computer Science</a> at Stanford, working with <a href="https://cs.stanford.edu/people/jure/" target="_blank" rel="noopener">Prof. Jure Leskovec</a> at the SNAP Group. I am also an instructor for <a href="https://web.stanford.edu/class/cs224w/" target="_blank" rel="noopener">CS224W (Machine Learning with Graphs)</a> and <a href="https://web.stanford.edu/class/cs246/" target="_blank" rel="noopener">CS246 (Mining Massive Datasets)</a>.
+      </p>
+
+      <!-- <p>
+        Previously, I was a postdoctoral researcher at the University of Pennsylvania, working with <a href="https://alelab.seas.upenn.edu/alejandro-ribeiro" target="_blank" rel="noopener">Prof. Alejandro Ribeiro</a>. I received my Ph.D. in Electrical and Computer Engineering from the University of Minnesota, advised by <a href="http://www.ece.virginia.edu/~nds5j/" target="_blank" rel="noopener">Prof. Nikos Sidiropoulos</a>. I earned my Diploma in Electrical and Computer Engineering from the National Technical University of Athens.
+      </p> -->
+
+      <p>
+        I build <strong>foundation models for structured data</strong>, including relational databases, graphs, single-cell transcriptomics, and protein sequences. I also develop <strong>principled pretraining and adaptation </strong> methods for <strong>large language models</strong>. 
+        <!-- I lead industry-academic collaborations with NVIDIA, Microsoft, SAP, Kumo.AI, and the Chan Zuckerberg Initiative. -->
+      </p>
+
+      <div class="social-icons">
+        <a href="mailto:charilaos@cs.stanford.edu" title="Email" aria-label="Email">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" xmlns="http://www.w3.org/2000/svg">
+            <rect x="3" y="5" width="18" height="14" rx="2"/>
+            <path d="M3 7l9 6 9-6"/>
+          </svg>
+        </a>
+        <a href="https://scholar.google.com/citations?user=8EGcDkUAAAAJ" target="_blank" rel="noopener" title="Google Scholar" aria-label="Google Scholar">
+          <svg viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+            <path d="M12 2L1 9l4 2.18v6L12 21l7-3.82v-6l2-1.09V17h2V9L12 2zm6.82 7L12 12.72 5.18 9 12 5.28 18.82 9zM17 15.99l-5 2.73-5-2.73v-3.72L12 15l5-2.73v3.72z"/>
+          </svg>
+        </a>
+        <a href="https://github.com/ckanatsoulis" target="_blank" rel="noopener" title="GitHub" aria-label="GitHub">
+          <svg viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+            <path d="M12 .5C5.73.5.5 5.74.5 12.02c0 5.08 3.29 9.39 7.86 10.91.57.1.78-.25.78-.55v-1.93c-3.2.7-3.88-1.54-3.88-1.54-.52-1.33-1.28-1.69-1.28-1.69-1.04-.71.08-.7.08-.7 1.15.08 1.76 1.18 1.76 1.18 1.03 1.76 2.7 1.25 3.36.96.1-.75.4-1.25.73-1.54-2.55-.29-5.24-1.28-5.24-5.69 0-1.26.45-2.29 1.18-3.1-.12-.29-.51-1.46.11-3.04 0 0 .97-.31 3.17 1.18.92-.26 1.91-.39 2.89-.39.98 0 1.97.13 2.89.39 2.2-1.49 3.17-1.18 3.17-1.18.62 1.58.23 2.75.11 3.04.73.81 1.18 1.84 1.18 3.1 0 4.42-2.69 5.39-5.26 5.68.41.36.78 1.06.78 2.14v3.17c0 .31.21.66.79.55C20.21 21.4 23.5 17.1 23.5 12.02 23.5 5.74 18.27.5 12 .5z"/>
+          </svg>
+        </a>
+        <a href="https://www.linkedin.com/in/ckanatsoulis" target="_blank" rel="noopener" title="LinkedIn" aria-label="LinkedIn">
+          <svg viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+            <path d="M20.45 20.45h-3.55v-5.57c0-1.33-.02-3.04-1.85-3.04-1.85 0-2.13 1.45-2.13 2.94v5.67H9.36V9h3.41v1.56h.05c.47-.9 1.64-1.85 3.37-1.85 3.6 0 4.27 2.37 4.27 5.45v6.29zM5.34 7.43a2.06 2.06 0 1 1 0-4.12 2.06 2.06 0 0 1 0 4.12zM7.12 20.45H3.56V9h3.56v11.45zM22.22 0H1.77C.79 0 0 .77 0 1.72v20.56C0 23.23.79 24 1.77 24h20.45c.98 0 1.78-.77 1.78-1.72V1.72C24 .77 23.2 0 22.22 0z"/>
+          </svg>
+        </a>
+        <!-- <a href="assets/pdf/kanatsoulis_cv.pdf" title="CV (PDF)" aria-label="CV (PDF)">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" xmlns="http://www.w3.org/2000/svg">
+            <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+            <polyline points="14 2 14 8 20 8"/>
+            <line x1="8" y1="13" x2="16" y2="13"/>
+            <line x1="8" y1="17" x2="16" y2="17"/>
+            <line x1="8" y1="9" x2="10" y2="9"/>
+          </svg>
+        </a> -->
+      </div>
+    </div>
+    <div>
+      <!-- Replace placeholder with actual image: -->
+      <img class="profile" src="assets/img/prof_pic.jpg" alt="Charilaos Kanatsoulis">
+      <!-- <div class="photo-placeholder">📷</div>
+      <p class="muted" style="font-size: 0.78rem; text-align: center; margin-top: 6px;">
+        Add <code>assets/img/prof_pic.jpg</code>
+      </p>
+    </div> -->
+  </section>
+
+  <!-- ============================ NEWS ============================ -->
+  <section id="news">
+    <h2>What's New</h2>
+    <ul class="news">
+      <li><span class="date">[04/2026]</span>At <strong>ICLR 2026</strong> in Rio de Janeiro 🇧🇷. Four papers: <a href="https://arxiv.org/abs/2505.10960" target="_blank" rel="noopener">Relational Graph Transformer</a>, <a href="https://arxiv.org/abs/2510.06377" target="_blank" rel="noopener">Relational Transformer</a>, <a href="https://arxiv.org/abs/2602.12606" target="_blank" rel="noopener">RelBench v2</a> (DATA-FM Workshop), and <a href="https://www.biorxiv.org/content/10.1101/2025.07.03.663009v1" target="_blank" rel="noopener">GREmLN</a> (MLGenX Workshop).</li>
+      <li><span class="date">[03/2026]</span>🎉 Co-organizing the <a href="https://openreview.net/group?id=ICML.cc/2026/Workshop/GFM" target="_blank" rel="noopener"><strong>Graph Foundation Models: A New Era for Graph Machine Learning</strong></a> workshop, accepted at ICML 2026 (Seoul, S. Korea).</li>
+      <li><span class="date">[01/2026]</span><a href="https://events.ucsc.edu/event/cse-colloquium-towards-relational-foundation-models-zero-shot-forecasting-over-relational-databases/" target="_blank" rel="noopener">CSE Colloquium talk</a> at UC Santa Cruz: "Towards Relational Foundation Models: Zero-Shot Forecasting over Relational Databases."</li>
+      <li><span class="date">[12/2025]</span>🏆 Oral at EurIPS Workshop on AI for Tabular Data for <a href="https://arxiv.org/abs/2510.06377" target="_blank" rel="noopener">Relational Transformer</a>!</li>
+      <li><span class="date">[11/2025]</span>Invited talk on foundation models for relational data at UC Berkeley (<a href="https://sites.google.com/lbl.gov/networks-for-science" target="_blank" rel="noopener">Networks for Science Workshop</a>).</li>
+      <li><span class="date">[10/2025]</span>New preprint: <a href="https://arxiv.org/abs/2510.06377" target="_blank" rel="noopener">Relational Transformer</a>. Foundation model for forecasting on relational databases with zero-shot generalization.</li>
+      <li><span class="date">[10/2025]</span>Co-organizing the <a href="https://snap.stanford.edu/graphlearning-workshop-2025/" target="_blank" rel="noopener">Stanford Graph Learning Workshop 2025</a>.</li>
+      <li><span class="date">[09/2025]</span>🎉 <a href="https://github.com/stair-lab/kg-gen" target="_blank" rel="noopener">KGGen</a> at NeurIPS 2025, now with <strong>1.1k+ GitHub stars</strong>. <code>pip install kg-gen</code>.</li>
+      <li><span class="date">[08/2025]</span>🏆 <strong>Best Paper Award</strong> at KDD Temporal Graph Learning Workshop for <a href="https://arxiv.org/abs/2505.10960" target="_blank" rel="noopener">Relational Graph Transformer</a>!</li>
+      <li><span class="date">[08/2025]</span>Panelist at the <a href="https://sites.google.com/view/tgl-workshop-2025/" target="_blank" rel="noopener">Temporal Graph Learning Workshop</a> at KDD 2025.</li>
+      <li><span class="date">[07/2025]</span>New preprint: <a href="https://www.biorxiv.org/content/10.1101/2025.07.03.663009v1" target="_blank" rel="noopener">GREmLN</a>. First transformer foundation model for single-cell genomics with gene-regulatory networks. Collaboration with CZI.</li>
+      <li><span class="date">[06/2025]</span>Co-organizing <a href="https://newgraphperspectives.com/" target="_blank" rel="noopener">New Perspectives in Advancing Graph Machine Learning</a> at NeurIPS 2025.</li>
+      <li><span class="date">[06/2025]</span>Survey paper: <a href="https://arxiv.org/abs/2506.16654" target="_blank" rel="noopener">Relational Deep Learning</a> accepted at KDD 2025.</li>
+      <li><span class="date">[05/2025]</span><a href="https://sites.google.com/view/rdltutorial2025/home" target="_blank" rel="noopener">Relational Deep Learning Tutorial</a> accepted at ACM KDD 2025.</li>
+      <li><span class="date">[04/2025]</span>Two papers at ICML 2025: <a href="https://arxiv.org/abs/2502.06784" target="_blank" rel="noopener">RelGNN</a> and <a href="https://openreview.net/forum?id=R9iBZen9aY" target="_blank" rel="noopener">Zero-shot Generalization of GNNs</a>.</li>
+      <li><span class="date">[02/2025]</span>New preprint: <a href="https://arxiv.org/abs/2502.09956" target="_blank" rel="noopener">KGGen</a>. Knowledge-graph extraction from text with LLMs. We also release MINE, the first benchmark for KG extraction.</li>
+      <li><span class="date">[02/2025]</span>New preprint: <a href="https://arxiv.org/abs/2502.06784" target="_blank" rel="noopener">RelGNN</a>. Composite message passing for relational deep learning, up to 25% improvement over baselines.</li>
+      <li><span class="date">[01/2025]</span><a href="https://arxiv.org/abs/2502.01122" target="_blank" rel="noopener">PEARL: Learning Efficient Positional Encodings with GNNs</a> accepted at ICLR 2025.</li>
+      <li><span class="date">[12/2024]</span>Invited talk on Relational Deep Learning at the <a href="https://aibootcamp.caltech.edu/" target="_blank" rel="noopener">Caltech AI Bootcamp</a>.</li>
+      <li><span class="date">[11/2024]</span>Invited talk on next-generation positional encodings at the <a href="https://lu.ma/f8rammuw" target="_blank" rel="noopener">LoG meetup</a>, Stanford.</li>
+      <li><span class="date">[11/2024]</span><a href="https://arxiv.org/abs/2310.03272" target="_blank" rel="noopener">Transferable Graph Autoencoder for Network Alignment</a> accepted at LoG 2024.</li>
+      <li><span class="date">[11/2024]</span>Talk on next-generation graph transformers at the <a href="https://snap.stanford.edu/graphlearning-workshop-2024/" target="_blank" rel="noopener">Stanford Graph Learning Workshop 2024</a>.</li>
+      <li><span class="date">[10/2024]</span>Co-teaching <a href="https://web.stanford.edu/class/cs224w/" target="_blank" rel="noopener">CS 224W</a> at Stanford with Jure.</li>
+      <li><span class="date">[10/2024]</span>New preprint: <a href="https://arxiv.org/abs/2410.04060" target="_blank" rel="noopener">LoRTA</a>. Low-rank tensor adaptation for LLMs and protein models (Microsoft collaboration).</li>
+      <li><span class="date">[10/2024]</span>Co-organizing the <a href="https://snap.stanford.edu/graphlearning-workshop-2024/" target="_blank" rel="noopener">Stanford Graph Learning Workshop 2024</a>.</li>
+      <li><span class="date">[01/2024]</span>🚀 Joined Stanford as Research Scientist at the SNAP Group.</li>
+    </ul>
+  </section>
+
+  <!-- ============================ RESEARCH ============================ -->
+  <section id="research">
+    <h2>Recent Research Projects</h2>
+
+    <div class="tabs" role="tablist">
+      <button class="active" data-tab="rdl" type="button">Relational Deep Learning &amp; GFMs</button>
+      <button data-tab="theory" type="button">GNN Design &amp; Expressivity</button>
+      <button data-tab="kg" type="button">Knowledge Graphs &amp; LLMs</button>
+      <button data-tab="bio" type="button">Biomedical AI</button>
+      <button data-tab="adapt" type="button">Parameter-Efficient Adaptation</button>
+    
+    </div>
+
+    <!-- ============== Tab: Relational Deep Learning ============== -->
+    <div class="tab-panel active" id="tab-rdl">
+
+      <div class="paper-card">
+        <div class="paper-img-placeholder">Relational Transformer</div>
+        <div>
+          <div class="paper-title">Relational Transformer: Toward Zero-Shot Foundation Models for Relational Data</div>
+          <div class="paper-venue">ICLR 2026 <span class="award">Oral · EurIPS AI for Tabular Data</span></div>
+          <div class="paper-authors">R. Ranjan, V. Hudovernik, M. Znidar, <strong>C. I. Kanatsoulis</strong>, et al., J. Leskovec</div>
+          <p class="paper-summary"><strong>Problem.</strong> Foundation models for tabular and relational data lag behind LLMs and vision FMs.</p>
+          <p class="paper-summary"><strong>Contribution.</strong> A transformer architecture for forecasting on relational databases, enabling large-scale pretraining and zero-shot generalization across schemas.</p>
+          <!-- <p class="paper-summary"><strong>Key insight.</strong> Relational positional encoding + table-aware attention unlocks transfer across enterprise data layouts.</p> -->
+          <div class="paper-links">
+            <a href="https://arxiv.org/abs/2510.06377" target="_blank" rel="noopener">arXiv</a>
+            <a href="https://github.com/snap-stanford/relational-transformer" target="_blank" rel="noopener">Code</a>
+            <a href="https://relbench.stanford.edu/" target="_blank" rel="noopener">RelBench</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="paper-card">
+        <div class="paper-img-placeholder">Relational Graph Transformer</div>
+        <div>
+          <div class="paper-title">Relational Graph Transformer</div>
+          <div class="paper-venue">ICLR 2026 <span class="award">Best Paper · KDD TGL Workshop 2025</span></div>
+          <div class="paper-authors">V. P. Dwivedi, S. Jaladi, Y. Shen, F. López, <strong>C. I. Kanatsoulis</strong>, R. Puri, M. Fey, J. Leskovec</div>
+          <p class="paper-summary"><strong>Problem.</strong> Graph transformers don't naturally handle multi-table relational data.</p>
+          <p class="paper-summary"><strong>Contribution.</strong> The first graph transformer architecture with relational attention and PEARL positional encoding tailored to multi-table data.</p>
+          <!-- <p class="paper-summary"><strong>Recognition.</strong> Best Paper Award at the KDD Temporal Graph Learning Workshop 2025.</p> -->
+          <div class="paper-links">
+            <a href="https://arxiv.org/abs/2505.10960" target="_blank" rel="noopener">arXiv</a>
+            <a href="https://github.com/snap-stanford/relgt" target="_blank" rel="noopener">Code</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="paper-card">
+        <div class="paper-img-placeholder">RelGNN</div>
+        <div>
+          <div class="paper-title">RelGNN: Composite Message Passing for Relational Deep Learning</div>
+          <div class="paper-venue">ICML 2025</div>
+          <div class="paper-authors">T. Chen, <strong>C. I. Kanatsoulis</strong>, J. Leskovec</div>
+          <p class="paper-summary"><strong>Problem.</strong> Standard GNNs underperform on relational deep learning tasks.</p>
+          <p class="paper-summary"><strong>Contribution.</strong> A novel GNN architecture for predictive queries on relational databases achieving SOTA performance with up to 25% improvement over baselines.</p>
+          <div class="paper-links">
+            <a href="https://arxiv.org/abs/2502.06784" target="_blank" rel="noopener">arXiv</a>
+            <a href="https://github.com/snap-stanford/RelGNN" target="_blank" rel="noopener">Code</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="paper-card">
+        <div class="paper-img-placeholder">RDL Survey</div>
+        <div>
+          <div class="paper-title">Relational Deep Learning: Challenges, Foundations and Next-Generation Architectures</div>
+          <div class="paper-venue">ACM KDD 2025</div>
+          <div class="paper-authors">V. P. Dwivedi, <strong>C. I. Kanatsoulis</strong>, S. Huang, J. Leskovec</div>
+          <p class="paper-summary"><strong>Contribution.</strong> The latest on Relational Deep Learning: challenges, foundations, and a vision toward foundation models for relational databases.</p>
+          <div class="paper-links">
+            <a href="https://arxiv.org/abs/2506.16654" target="_blank" rel="noopener">arXiv</a>
+            <a href="https://sites.google.com/view/rdltutorial2025/home" target="_blank" rel="noopener">Tutorial</a>
+            <a href="https://github.com/snap-stanford/relbench" target="_blank" rel="noopener">RelBench Code</a>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- ============== Tab: Knowledge Graphs ============== -->
+    <div class="tab-panel" id="tab-kg">
+
+      <div class="paper-card">
+        <div class="paper-img-placeholder">KGGen 1.1k★</div>
+        <div>
+          <div class="paper-title">KGGen: Extracting Knowledge Graphs from Plain Text with Language Models</div>
+          <div class="paper-venue">NeurIPS 2025 <span class="award">1.1k+ stars</span></div>
+          <div class="paper-authors">B. Mo, K. Yu, J. Kazdan, et al., <strong>C. I. Kanatsoulis</strong>, S. Koyejo</div>
+          <p class="paper-summary"><strong>Problem.</strong> Existing pipelines produce sparse, noisy KGs from text.</p>
+          <p class="paper-summary"><strong>Contribution.</strong> A Python package (<code>pip install kg-gen</code>) producing high-fidelity KGs via LLM extraction + entity clustering. Released <strong>MINE</strong>, the first benchmark for KG extraction.</p>
+          <p class="paper-summary"><strong>Impact.</strong> 1.1k+ GitHub stars; widely used for biomedical and scientific reasoning.</p>
+          <div class="paper-links">
+            <a href="https://arxiv.org/abs/2502.09956" target="_blank" rel="noopener">arXiv</a>
+            <a href="https://github.com/stair-lab/kg-gen" target="_blank" rel="noopener">Code</a>
+            <a href="https://pypi.org/project/kg-gen/" target="_blank" rel="noopener">PyPI</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="paper-card">
+        <div class="paper-img-placeholder">TeX-Graph<br>COVID-19</div>
+        <div>
+          <div class="paper-title">TeX-Graph: Coupled Tensor-Matrix Knowledge-Graph Embedding for COVID-19 Drug Repurposing</div>
+          <div class="paper-venue">SIAM SDM 2021</div>
+          <div class="paper-authors"><strong>C. I. Kanatsoulis</strong>, N. D. Sidiropoulos</div>
+          <p class="paper-summary"><strong>Problem.</strong> KG embeddings for biomedical discovery require fusing structured and textual evidence.</p>
+          <p class="paper-summary"><strong>Contribution.</strong> Coupled tensor-matrix factorization for biomedical knowledge graphs, applied to COVID-19 drug repurposing, an early AI-driven hypothesis-generation pipeline.</p>
+          <div class="paper-links">
+            <a href="https://arxiv.org/abs/2010.11367" target="_blank" rel="noopener">arXiv</a>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- ============== Tab: Biomedical AI ============== -->
+    <div class="tab-panel" id="tab-bio">
+
+      <div class="paper-card">
+        <div class="paper-img-placeholder">GREmLN<br>CZI</div>
+        <div>
+          <div class="paper-title">GREmLN: A Cellular Regulatory Network-Aware Transcriptomics Foundation Model</div>
+          <div class="paper-venue">ICLR 2026 Workshop on ML for Genomics Explorations</div>
+          <div class="paper-authors">M. Zhang, V. Swamy, R. Cassius, L. Dupire, <strong>C. I. Kanatsoulis</strong>, et al., A. Califano</div>
+          <p class="paper-summary"><strong>Problem.</strong> Single-cell transcriptomics foundation models treat genes as independent tokens, ignoring regulatory structure.</p>
+          <p class="paper-summary"><strong>Contribution.</strong> A multimodal graph transformer that injects gene-regulatory-network structure as positional information.</p>
+          <p class="paper-summary"><strong>Key insight.</strong> Biological priors during pretraining capture long-range gene-token dependencies for cancer, Alzheimer's, and other downstream tasks.</p>
+          <div class="paper-links">
+            <a href="https://www.biorxiv.org/content/10.1101/2025.07.03.663009v1" target="_blank" rel="noopener">bioRxiv</a>
+            <a href="https://github.com/czi-ai/GREmLN" target="_blank" rel="noopener">Code</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- <div class="paper-card">
+        <div class="paper-img-placeholder">Proton<br>Protein Domain</div>
+        <div>
+          <div class="paper-title">Structure-free Protein Domain Segmentation with Proton</div>
+          <div class="paper-venue">Under review</div>
+          <div class="paper-authors">N. Namchittai, <strong>C. I. Kanatsoulis</strong>, Y. Rosen, J. Leskovec</div>
+          <p class="paper-summary"><strong>Problem.</strong> Protein domain segmentation typically relies on structure prediction (AlphaFold).</p>
+          <p class="paper-summary"><strong>Contribution.</strong> A structure-free approach to protein domain segmentation directly from sequence.</p>
+          <div class="paper-links">
+            <span class="paper-link-note">Paper &amp; code coming soon</span>
+          </div>
+        </div>
+      </div> -->
+
+    </div>
+
+    <!-- ============== Tab: Parameter-Efficient Adaptation ============== -->
+    <div class="tab-panel" id="tab-adapt">
+
+      <div class="paper-card">
+        <div class="paper-img-placeholder">LoRTA</div>
+        <div>
+          <div class="paper-title">LoRTA: Low Rank Tensor Adaptation of Large Language Models</div>
+          <div class="paper-venue">Under review · Microsoft collaboration</div>
+          <div class="paper-authors">I. Hounie, <strong>C. I. Kanatsoulis</strong>, A. Tandon, A. Ribeiro</div>
+          <p class="paper-summary"><strong>Problem.</strong> LoRA's matrix factorization leaves parameter-efficiency on the table for multi-axis adaptation.</p>
+          <p class="paper-summary"><strong>Contribution.</strong> Generalizes LoRA to <strong>tensor</strong> decomposition, reducing trainable parameters by up to <strong>two orders of magnitude</strong> at matched performance.</p>
+          <p class="paper-summary"><strong>Applications.</strong> DPO, instruction tuning, vision, and <strong>protein folding</strong> fine-tuning.</p>
+          <div class="paper-links">
+            <a href="https://arxiv.org/abs/2410.04060" target="_blank" rel="noopener">arXiv</a>
+            <a href="https://github.com/ihounie/lorta" target="_blank" rel="noopener">Code</a>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- ============== Tab: GNN Theory ============== -->
+    <div class="tab-panel" id="tab-theory">
+
+      <div class="paper-card">
+        <div class="paper-img-placeholder">PEARL</div>
+        <div>
+          <div class="paper-title">Learning Efficient Positional Encodings with Graph Neural Networks (PEARL)</div>
+          <div class="paper-venue">ICLR 2025</div>
+          <div class="paper-authors"><strong>C. I. Kanatsoulis</strong>, E. Choi, S. Jegelka, J. Leskovec, A. Ribeiro</div>
+          <p class="paper-summary"><strong>Problem.</strong> Eigenvector-based positional encodings (e.g., Laplacian PEs) give strong inductive bias to graph transformers but require expensive eigendecomposition and suffer from instability and limited expressivity.</p>
+          <p class="paper-summary"><strong>Contribution.</strong> PEARL is a learnable PE framework that approximates equivariant functions of eigenvectors with <strong>linear complexity</strong>, matching or surpassing full eigenvector PEs at one-to-two orders of magnitude lower cost.</p>
+          <p class="paper-summary"><strong>Key insight.</strong> Message-passing GNNs initialized with random / basis-vector node features compute nonlinear maps of eigenvectors, unlocking expressive positional encodings without explicit eigendecomposition. A foundational primitive for our GFM work.</p>
+          <div class="paper-links">
+            <a href="https://arxiv.org/abs/2502.01122" target="_blank" rel="noopener">arXiv</a>
+            <a href="https://github.com/ehejin/Pearl-PE" target="_blank" rel="noopener">Code</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="paper-card">
+        <div class="paper-img-placeholder">GNN ➜ WL</div>
+        <div>
+          <div class="paper-title">Graph Neural Networks Are More Powerful Than We Think</div>
+          <div class="paper-venue">ICASSP 2024</div>
+          <div class="paper-authors"><strong>C. I. Kanatsoulis</strong>, A. Ribeiro</div>
+          <p class="paper-summary"><strong>Problem.</strong> Common belief: Weisfeiler-Lehman bounds GNN expressivity.</p>
+          <p class="paper-summary"><strong>Contribution.</strong> GNNs can discriminate the majority of real graphs; WL is not the real limit. We design convolutional architectures that are provably more expressive than WL.</p>
+          <div class="paper-links">
+            <a href="https://arxiv.org/abs/2205.09801" target="_blank" rel="noopener">arXiv</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="paper-card">
+        <div class="paper-img-placeholder">Counting<br>Substructures</div>
+        <div>
+          <div class="paper-title">Counting Graph Substructures with Graph Neural Networks</div>
+          <div class="paper-venue">ICLR 2024</div>
+          <div class="paper-authors"><strong>C. I. Kanatsoulis</strong>, A. Ribeiro</div>
+          <p class="paper-summary"><strong>Problem.</strong> Counting substructures (triangles, cycles, paths, cliques) is fundamental to chemistry, biology, and graph reasoning, yet standard message-passing GNNs are bounded by 1-WL and provably cannot count most of them.</p>
+          <p class="paper-summary"><strong>Contribution.</strong> A theoretical and architectural framework characterizing exactly when GNNs can count substructures, together with provably expressive architectures that go beyond 1-WL.</p>
+          <p class="paper-summary"><strong>Key insight.</strong> Substructure counting is a much finer-grained yardstick for GNN expressivity than the 1-WL test, and reveals the latent power of message-passing models.</p>
+          <div class="paper-links">
+            <a href="https://openreview.net/forum?id=qaJxPhkYtD" target="_blank" rel="noopener">OpenReview</a>
+            <a href="https://openreview.net/pdf?id=qaJxPhkYtD" target="_blank" rel="noopener">PDF</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- <div class="paper-card">
+        <div class="paper-img-placeholder">GCA<br>Diffusion</div>
+        <div>
+          <div class="paper-title">Graph Convolutional Attention: A Spectral Perspective on Graph Denoising and Diffusion</div>
+          <div class="paper-venue">Under review</div>
+          <div class="paper-authors">S. Khalafi, I. Krawczuk, S. Rozada, <strong>C. I. Kanatsoulis</strong>, A. G. Marques, A. Ribeiro</div>
+          <p class="paper-summary"><strong>Contribution.</strong> Spectral perspective on graph convolutional attention and its connection to denoising and graph diffusion.</p>
+          <div class="paper-links">
+            <span class="paper-link-note">arXiv coming soon</span>
+          </div>
+        </div>
+      </div> -->
+
+    </div>
+
+  </section>
+
+  <!-- ============================ EDUCATION ============================ -->
+  <!-- <section id="education">
+    <h2>Education &amp; Experience</h2>
+    <div class="edu-grid">
+
+      <div class="edu-card">
+        <h3>Stanford University</h3>
+        <div class="when">2024 – present · Research Scientist</div>
+        <p>SNAP Group, Department of Computer Science. Working with Prof. Jure Leskovec.</p>
+      </div>
+
+      <div class="edu-card">
+        <h3>University of Pennsylvania</h3>
+        <div class="when">2021 – 2023 · Postdoctoral Researcher</div>
+        <p>Alelab, ESE Department. Working with Prof. Alejandro Ribeiro.</p>
+      </div>
+
+      <div class="edu-card">
+        <h3>Sentera, Inc.</h3>
+        <div class="when">2020 – 2021 · Research Scientist</div>
+        <p>Deep-learning super-resolution for agricultural UAV / satellite imaging. Shipped models to production.</p>
+      </div>
+
+      <div class="edu-card">
+        <h3>University of Minnesota</h3>
+        <div class="when">2014 – 2020 · PhD, Electrical &amp; Computer Engineering</div>
+        <p>Thesis: <em>Tensor Methods for Signal Reconstruction and Network Embedding</em>. Advisor: Prof. Nikos Sidiropoulos.</p>
+      </div>
+
+      <div class="edu-card">
+        <h3>National Technical University of Athens</h3>
+        <div class="when">2007 – 2014 · Diploma (Dipl.-Ing.), Electrical &amp; Computer Engineering</div>
+      </div>
+
+    </div>
+  </section> -->
+
+  <!-- ============================ TEACHING ============================ -->
+  <section id="teaching">
+    <h2>Teaching</h2>
+
+    <div class="course-grid">
+      <div class="course-card">
+        <div class="course-code">CS224W</div>
+        <div class="course-title"><a href="https://web.stanford.edu/class/cs224w/" target="_blank" rel="noopener">Machine Learning with Graphs</a></div>
+        <div class="course-meta">Stanford University · 2024 &ndash; present<br>with Jure Leskovec</div>
+      </div>
+
+      <div class="course-card">
+        <div class="course-code">CS246</div>
+        <div class="course-title"><a href="https://web.stanford.edu/class/cs246/" target="_blank" rel="noopener">Mining Massive Datasets</a></div>
+        <div class="course-meta">Stanford University · 2024 &ndash; present<br>with Jure Leskovec</div>
+      </div>
+
+      <div class="course-card">
+        <div class="course-code">ESE5140</div>
+        <div class="course-title"><a href="https://gnn.seas.upenn.edu/" target="_blank" rel="noopener">Graph Neural Networks</a></div>
+        <div class="course-meta">University of Pennsylvania · 2022 &ndash; 2023</div>
+      </div>
+    </div>
+
+    <!-- <div class="info-row">
+      <span class="label">Selected Talks</span>
+      <strong>2026:</strong> UC Santa Cruz. <strong>2025:</strong> Google Research, UC Berkeley, UC San Diego, Stanford. <strong>2024:</strong> Caltech, Stanford. <strong>2023:</strong> UC San Diego, Stanford, École Polytechnique (Paris), TU Darmstadt, U. Maryland, RPI. <strong>2020:</strong> Amazon Alexa, USC. <strong>2019:</strong> Baidu. <strong>2018:</strong> Arm Inc.
+    </div>
+
+    <div class="info-row">
+      <span class="label">Selected Awards</span>
+      <strong>Best Paper Award</strong>, KDD Temporal Graph Learning Workshop 2025 (Relational Graph Transformer) · <strong>Best Student Paper</strong>, IEEE CAMSAP 2023 · Best Student Paper Finalist, IEEE Asilomar 2023 · ADC Graduate Fellowship in Wireless &amp; Networking Technology, U. Minnesota 2014.
+    </div> -->
+
+    <p class="see-cv">
+      See the <a href="cv.html">full CV</a> for workshop organization, invited talks, service, and complete awards list.
+    </p>
+  </section>
+
+</main>
+
+<footer class="site">
+  <!-- <p>© 2026 Charilaos I. Kanatsoulis · 349, William Gates CS Building, Stanford CA · <a href="mailto:charilaos@cs.stanford.edu">charilaos [at] cs.stanford.edu</a></p> -->
+  <p>© 2026 Charilaos I. Kanatsoulis · 349 William Gates CS Building, Stanford CA · charilaos [at] cs.stanford.edu</p>
+
+</footer>
+
+<script>
+  // Tab switching
+  document.querySelectorAll('.tabs button').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const tab = btn.dataset.tab;
+      document.querySelectorAll('.tabs button').forEach(b => b.classList.remove('active'));
+      document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
+      btn.classList.add('active');
+      document.getElementById('tab-' + tab).classList.add('active');
+    });
+  });
+</script>
+
+</body>
+</html>

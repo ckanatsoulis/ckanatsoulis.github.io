@@ -1,0 +1,630 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Curriculum Vitae · Charilaos I. Kanatsoulis</title>
+  <meta name="description" content="Curriculum Vitae of Charilaos I. Kanatsoulis, Research Scientist at Stanford SNAP Group." />
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E👋%3C/text%3E%3C/svg%3E" />
+
+  <!-- Set theme before paint to avoid a flash of wrong color scheme -->
+  <script>
+    (function () {
+      try {
+        var stored = localStorage.getItem('theme');
+        var prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+        var theme = stored || (prefersDark ? 'dark' : 'light');
+        document.documentElement.setAttribute('data-theme', theme);
+      } catch (e) {
+        document.documentElement.setAttribute('data-theme', 'light');
+      }
+    })();
+  </script>
+
+  <style>
+    :root {
+      --accent: #8C1515;
+      --accent-soft: #F4E5E5;
+      --accent-dark: #5E0F0F;
+      --venue: #B22222;
+      --text: #1a1a1a;
+      --muted: #666;
+      --bg: #ffffff;
+      --bg-soft: #f7f7f7;
+      --border: #e2e2e2;
+      --card-shadow: 0 1px 3px rgba(0,0,0,0.04);
+      --max-width: 980px;
+    }
+
+    html[data-theme="dark"] {
+      --accent: #D77676;
+      --accent-soft: #2b1a1a;
+      --accent-dark: #B85555;
+      --venue: #F08585;
+      --text: #e6e6e6;
+      --muted: #9a9a9a;
+      --bg: #0d1117;
+      --bg-soft: #161b22;
+      --border: #2a2f37;
+      --card-shadow: 0 1px 3px rgba(0,0,0,0.4);
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Helvetica Neue", Arial, sans-serif;
+      color: var(--text);
+      background: var(--bg);
+      line-height: 1.55;
+      margin: 0;
+      padding: 0;
+      font-size: 16px;
+    }
+
+    a { color: var(--accent); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+
+    main { max-width: var(--max-width); margin: 0 auto; padding: 0 24px 64px; }
+
+    /* ====== Header / Sticky nav (matches index.html) ====== */
+    header.site {
+      border-bottom: 1px solid var(--border);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      backdrop-filter: blur(8px);
+      background: rgba(255,255,255,0.92);
+    }
+    html[data-theme="dark"] header.site { background: rgba(13,17,23,0.92); }
+    header.site nav {
+      max-width: var(--max-width);
+      margin: 0 auto;
+      padding: 12px 24px;
+      display: flex;
+      gap: 22px;
+      align-items: center;
+      flex-wrap: wrap;
+      font-size: 14px;
+    }
+    header.site .name {
+      font-weight: 700;
+      color: var(--text);
+      margin-right: auto;
+      font-size: 15px;
+    }
+    header.site a { color: var(--text); }
+    header.site a:hover { color: var(--accent); text-decoration: none; }
+    header.site a.active { color: var(--accent); }
+
+    /* Theme toggle */
+    .theme-toggle {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 32px;
+      height: 32px;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      background: var(--bg-soft);
+      color: var(--text);
+      cursor: pointer;
+      padding: 0;
+      margin-left: 4px;
+      transition: color 0.15s ease, border-color 0.15s ease, background 0.15s ease;
+    }
+    .theme-toggle:hover { color: var(--accent); border-color: var(--accent); }
+    .theme-toggle svg { width: 16px; height: 16px; display: block; }
+    .theme-toggle .icon-sun { display: none; }
+    .theme-toggle .icon-moon { display: block; }
+    html[data-theme="dark"] .theme-toggle .icon-moon { display: none; }
+    html[data-theme="dark"] .theme-toggle .icon-sun { display: block; }
+
+    /* ====== Page title ====== */
+    h1.page-title {
+      font-size: 2.2rem;
+      letter-spacing: -0.5px;
+      font-weight: 700;
+      margin: 56px 0 6px;
+    }
+    .page-sub {
+      color: var(--muted);
+      margin: 0 0 32px;
+    }
+    .page-sub a { color: var(--accent); }
+
+    /* ====== Section headings ====== */
+    h2.cv-section {
+      font-size: 0.95rem;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      color: var(--accent);
+      margin: 48px 0 18px;
+      font-weight: 700;
+      padding-bottom: 8px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    /* ====== Two-column entries (Zoe style) ====== */
+    .cv-list {
+      display: grid;
+      grid-template-columns: 180px 1fr;
+      gap: 22px 28px;
+      margin: 0;
+    }
+    .cv-date {
+      color: var(--muted);
+      font-size: 0.9rem;
+      font-variant-numeric: tabular-nums;
+      padding-top: 2px;
+    }
+    .cv-content { }
+    .cv-content .role {
+      font-weight: 700;
+      font-size: 1.02rem;
+    }
+    .cv-content .where {
+      color: var(--text);
+    }
+    .cv-content .where a { color: var(--text); border-bottom: 1px dotted var(--muted); }
+    .cv-content .where a:hover { color: var(--accent); border-bottom-color: var(--accent); text-decoration: none; }
+    .cv-content .extra {
+      color: var(--muted);
+      font-size: 0.92rem;
+      margin-top: 4px;
+    }
+    .cv-content ul {
+      margin: 6px 0 0;
+      padding-left: 18px;
+      color: var(--muted);
+      font-size: 0.95rem;
+    }
+    .cv-content ul li { margin: 2px 0; }
+
+    /* Mobile: collapse to single column */
+    @media (max-width: 700px) {
+      .cv-list {
+        grid-template-columns: 1fr;
+        gap: 6px 0;
+      }
+      .cv-list .cv-content { margin-bottom: 18px; }
+      .cv-date { font-weight: 600; color: var(--accent); }
+    }
+
+    /* ====== Service ====== */
+    .service-block { margin: 0 0 12px; }
+    .service-block strong { color: var(--text); }
+
+    /* ====== Footer ====== */
+    footer.site {
+      margin-top: 64px;
+      padding: 24px;
+      text-align: center;
+      color: var(--muted);
+      font-size: 0.85rem;
+      border-top: 1px solid var(--border);
+    }
+  </style>
+</head>
+<body>
+
+<header class="site">
+  <nav>
+    <span class="name">Charilaos I. Kanatsoulis</span>
+    <a href="index.html#about">About</a>
+    <a href="index.html#news">News</a>
+    <a href="index.html#research">Research</a>
+    <!-- <a href="index.html#education">Education</a> -->
+    <a href="index.html#teaching">Teaching</a>
+    <a href="cv.html" class="active">CV</a>
+    <a href="https://scholar.google.com/citations?user=8EGcDkUAAAAJ" target="_blank" rel="noopener">Scholar</a>
+    <button id="theme-toggle" class="theme-toggle" type="button" aria-label="Toggle dark mode" title="Toggle dark mode">
+      <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" xmlns="http://www.w3.org/2000/svg">
+        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
+      </svg>
+      <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" xmlns="http://www.w3.org/2000/svg">
+        <circle cx="12" cy="12" r="4"/>
+        <path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/>
+      </svg>
+    </button>
+  </nav>
+</header>
+
+<main>
+
+  <h1 class="page-title">Curriculum Vitae</h1>
+  <p class="page-sub">
+    Research Scientist, Stanford University · SNAP Group.
+    <!-- <a href="assets/pdf/kanatsoulis_cv.pdf" target="_blank" rel="noopener">Download PDF</a>. -->
+  </p>
+
+  <!-- ============================ EDUCATION ============================ -->
+  <h2 class="cv-section">Education</h2>
+  <div class="cv-list">
+
+    <div class="cv-date">2020</div>
+    <div class="cv-content">
+      <div class="role">Ph.D. in Electrical &amp; Computer Engineering</div>
+      <div class="where">University of Minnesota, Twin Cities</div>
+      <div class="extra">Thesis: <em>Tensor Methods for Signal Reconstruction and Network Embedding.</em> Advisor: Prof. Nikolaos D. Sidiropoulos.</div>
+    </div>
+
+    <!-- <div class="cv-date">2007 &ndash; 2014</div> -->
+    <div class="cv-date">2014</div>
+    <div class="cv-content">
+      <div class="role">Diploma (Dipl.-Ing.), Electrical &amp; Computer Engineering</div>
+      <div class="where">National Technical University of Athens</div>
+    </div>
+
+  </div>
+
+  <!-- ============================ EXPERIENCE ============================ -->
+  <h2 class="cv-section">Professional Experience</h2>
+  <div class="cv-list">
+
+    <div class="cv-date">2024 &ndash; present</div>
+    <div class="cv-content">
+      <div class="role">Research Scientist</div>
+      <div class="where">Stanford University · <a href="https://snap.stanford.edu/" target="_blank" rel="noopener">SNAP Group</a> (with Jure Leskovec)</div>
+      <ul>
+        <li>Leading ML research at the SNAP Group.</li>
+        <li>Graph neural networks, graph foundation models, and large-scale benchmarks for forecasting over relational databases.</li>
+        <li>Knowledge-graph models for text-to-KG extraction with LLMs, and multi-modal KG reasoning.</li>
+        <li>Transformer architectures for single-cell transcriptomics, gene-regulatory networks, and protein modeling.</li>
+        <li>Industry-academic collaborations with NVIDIA, SAP, Kumo.AI, and the Chan Zuckerberg Initiative.</li>
+        <li>Instructor for <a href="https://web.stanford.edu/class/cs224w/" target="_blank" rel="noopener">CS224W</a> and <a href="https://web.stanford.edu/class/cs246/" target="_blank" rel="noopener">CS246</a>.</li>
+      </ul>
+    </div>
+
+    <div class="cv-date">2021 &ndash; 2023</div>
+    <div class="cv-content">
+      <div class="role">Postdoctoral Researcher</div>
+      <div class="where">University of Pennsylvania · Alelab (with Alejandro Ribeiro)</div>
+      <ul>
+        <li>GNN design and expressivity (ICLR 2024, ICLR 2025).</li>
+        <li>Parameter-efficient tensor adaptation for LLMs, vision, and protein models (LoRTA).</li>
+        <li>Decentralized GNN policies for multi-agent coordination.</li>
+        <li>Instructor for <a href="https://gnn.seas.upenn.edu/" target="_blank" rel="noopener">ESE5140 Graph Neural Networks</a>.</li>
+      </ul>
+    </div>
+
+    <div class="cv-date">2020 &ndash; 2021</div>
+    <div class="cv-content">
+      <div class="role">Research Scientist</div>
+      <div class="where">Sentera, Inc.</div>
+      <ul>
+        <li>Deep-learning super-resolution pipelines for agricultural UAV / satellite imaging.</li>
+        <li>Shipped models to the production imaging stack.</li>
+      </ul>
+    </div>
+
+  </div>
+
+  <!-- ============================ AWARDS ============================ -->
+  <h2 class="cv-section">Awards &amp; Honors</h2>
+  <div class="cv-list">
+
+    <div class="cv-date">2025</div>
+    <div class="cv-content">
+      <div class="where"><strong>Best Paper Award</strong>, KDD Temporal Graph Learning Workshop (Relational Graph Transformer).</div>
+    </div>
+
+    <div class="cv-date">2023</div>
+    <div class="cv-content">
+      <div class="where"><strong>Best Student Paper Award</strong>, IEEE CAMSAP.</div>
+    </div>
+
+    <div class="cv-date">2023</div>
+    <div class="cv-content">
+      <div class="where">Best Student Paper Award Finalist, IEEE Asilomar Conference.</div>
+    </div>
+
+    <!-- <div class="cv-date">2019</div>
+    <div class="cv-content">
+      <div class="where">NSF Student Travel Grant, EUSIPCO.</div>
+    </div> -->
+
+    <!-- <div class="cv-date">2016</div>
+    <div class="cv-content">
+      <div class="where">Graduate Scholarship, Gerondelis Foundation.</div>
+    </div> -->
+
+    <div class="cv-date">2015</div>
+    <div class="cv-content">
+      <div class="where">ADC Graduate Fellowship in Wireless &amp; Networking Technology, University of Minnesota.</div>
+    </div>
+
+    <div class="cv-date">2007</div>
+    <div class="cv-content">
+      <div class="where">Finalist, Hellenic Mathematical Competition.</div>
+    </div>
+
+    <!-- <div class="cv-date">2007</div>
+    <div class="cv-content">
+      <div class="where">Excellence Award, Greek Nationwide University Entrance Examinations.</div>
+    </div> -->
+
+  </div>
+
+  <!-- ============================ WORKSHOP ORG ============================ -->
+  <h2 class="cv-section">Workshop &amp; Tutorial Organization</h2>
+  <div class="cv-list">
+
+    <div class="cv-date">2026</div>
+    <div class="cv-content">
+      <div class="role"><a href="https://openreview.net/group?id=ICML.cc/2026/Workshop/GFM" target="_blank" rel="noopener">Graph Foundation Models: A New Era for Graph Machine Learning</a></div>
+      <div class="extra">ICML Workshop · Seoul, S. Korea</div>
+    </div>
+
+    <div class="cv-date">2025</div>
+    <div class="cv-content">
+      <div class="role">RDL: Foundations, Advanced Methods and Hands-on Development</div>
+      <div class="extra">Learning on Graphs (LoG) Conference · Phoenix, AZ</div>
+    </div>
+
+    <div class="cv-date">2025</div>
+    <div class="cv-content">
+      <div class="role"><a href="https://newgraphperspectives.com/" target="_blank" rel="noopener">New Perspectives in Advancing Graph Machine Learning</a></div>
+      <div class="extra">NeurIPS Workshop · San Diego, CA</div>
+    </div>
+
+    <div class="cv-date">2025</div>
+    <div class="cv-content">
+      <div class="role"><a href="https://snap.stanford.edu/graphlearning-workshop-2025/" target="_blank" rel="noopener">Stanford Graph Learning Workshop</a></div>
+      <div class="extra">Stanford, CA</div>
+    </div>
+
+    <div class="cv-date">2025</div>
+    <div class="cv-content">
+      <div class="role"><a href="https://sites.google.com/view/rdltutorial2025/home" target="_blank" rel="noopener">Relational Deep Learning Tutorial</a></div>
+      <div class="extra">ACM KDD · Toronto, Canada</div>
+    </div>
+
+    <div class="cv-date">2024</div>
+    <div class="cv-content">
+      <div class="role"><a href="https://snap.stanford.edu/graphlearning-workshop-2024/" target="_blank" rel="noopener">Stanford Graph Learning Workshop</a></div>
+      <div class="extra">Stanford, CA</div>
+    </div>
+
+    <div class="cv-date">2024</div>
+    <div class="cv-content">
+      <div class="role">Multiview Learning</div>
+      <div class="extra">IEEE Asilomar Conference on Signals, Systems and Computers · Pacific Grove, CA</div>
+    </div>
+
+    <div class="cv-date">2024</div>
+    <div class="cv-content">
+      <div class="role">Learning with Few Labels</div>
+      <div class="extra">IEEE Sensor Array and Multichannel Signal Processing Workshop · Corvallis, OR</div>
+    </div>
+
+    <div class="cv-date">2023</div>
+    <div class="cv-content">
+      <div class="role">Graph Neural Networks short course</div>
+      <div class="extra">IEEE ICASSP · Rhodes, Greece</div>
+    </div>
+
+  </div>
+
+  <!-- ============================ INVITED TALKS ============================ -->
+  <h2 class="cv-section">Selected Invited Talks</h2>
+  <div class="cv-list">
+
+    <div class="cv-date">2026</div>
+    <div class="cv-content">
+      <div class="role">Next-Generation Architectures for Zero-Shot Forecasting</div>
+      <div class="extra"><a href="https://events.ucsc.edu/event/cse-colloquium-towards-relational-foundation-models-zero-shot-forecasting-over-relational-databases/" target="_blank" rel="noopener">UC Santa Cruz, CSE Colloquium</a> · Santa Cruz, CA</div>
+    </div>
+
+    <!-- <div class="cv-date">2025</div>
+    <div class="cv-content">
+      <div class="role">Towards Foundation Models for Relational Data</div>
+      <div class="extra">Google Research · virtual</div>
+    </div> -->
+
+    <div class="cv-date">2025</div>
+    <div class="cv-content">
+      <div class="role">Designing Transformers for Relational Data</div>
+      <div class="extra"><a href="https://sites.google.com/lbl.gov/networks-for-science" target="_blank" rel="noopener">UC Berkeley, Networks for Science Workshop</a> · Berkeley, CA</div>
+    </div>
+
+    <div class="cv-date">2025</div>
+    <div class="cv-content">
+      <div class="role">Towards Foundation Models for Relational Data</div>
+      <div class="extra">University of California San Diego · San Diego, CA</div>
+    </div>
+
+    <!-- <div class="cv-date">2025</div>
+    <div class="cv-content">
+      <div class="role">Time as a First Class Citizen in Relational Deep Learning</div>
+      <div class="extra"><a href="https://sites.google.com/view/tgl-workshop-2025/" target="_blank" rel="noopener">KDD Temporal Graph Learning Workshop</a> · Toronto, Canada</div>
+    </div> -->
+
+    <div class="cv-date">2024</div>
+    <div class="cv-content">
+      <div class="role">Relational Deep Learning: Graph Representation Learning on Relational Databases</div>
+      <div class="extra"><a href="https://aibootcamp.caltech.edu/" target="_blank" rel="noopener">Caltech AI Bootcamp</a></div>
+    </div>
+
+    <div class="cv-date">2024</div>
+    <div class="cv-content">
+      <div class="role">Next-Generation Positional Encodings for Graph Representation Learning</div>
+      <div class="extra"><a href="https://lu.ma/f8rammuw" target="_blank" rel="noopener">Learning on Graphs (LoG) meetup</a> · Stanford</div>
+    </div>
+
+    <div class="cv-date">2024</div>
+    <div class="cv-content">
+      <div class="role">Towards Next-Generation Graph Transformers</div>
+      <div class="extra"><a href="https://snap.stanford.edu/graphlearning-workshop-2024/" target="_blank" rel="noopener">Stanford Graph Learning Workshop</a> · Stanford, CA</div>
+    </div>
+
+    <div class="cv-date">2024</div>
+    <div class="cv-content">
+      <div class="role">Counting Graph Substructures with Graph Neural Networks</div>
+      <div class="extra">Information Theory and Applications Workshop · San Diego, CA</div>
+    </div>
+
+    <div class="cv-date">2023</div>
+    <div class="cv-content">
+      <div class="role">Harnessing Message-Passing beyond Weisfeiler-Lehman</div>
+      <div class="extra">Rensselaer Polytechnic Institute · Troy, NY</div>
+    </div>
+
+    <div class="cv-date">2023</div>
+    <div class="cv-content">
+      <div class="role">A Spectral Analysis on the Representation Power of GNNs</div>
+      <div class="extra">University of Maryland · College Park, MD</div>
+    </div>
+
+    <div class="cv-date">2023</div>
+    <div class="cv-content">
+      <div class="role">Representation Learning with Graph Neural Networks</div>
+      <div class="extra">Stanford University · Palo Alto, CA</div>
+    </div>
+
+    <div class="cv-date">2023</div>
+    <div class="cv-content">
+      <div class="role">Harnessing Message-Passing beyond Weisfeiler-Lehman</div>
+      <div class="extra">École Polytechnique · Paris, France</div>
+    </div>
+
+    <div class="cv-date">2023</div>
+    <div class="cv-content">
+      <div class="role">Representation Learning on Tensors and Graphs</div>
+      <div class="extra">Technical University Darmstadt · Darmstadt, Germany</div>
+    </div>
+
+    <!-- <div class="cv-date">2023</div>
+    <div class="cv-content">
+      <div class="role">Representation Learning on Graphs and Tensors</div>
+      <div class="extra">Southern Methodist University · Dallas, TX</div>
+    </div> -->
+
+    <!-- <div class="cv-date">2023</div>
+    <div class="cv-content">
+      <div class="role">Deep Learning through the Lens of Signal Processing</div>
+      <div class="extra">University of California San Diego · San Diego, CA</div>
+    </div> -->
+
+    <div class="cv-date">2023</div>
+    <div class="cv-content">
+      <div class="role">Representation Learning on Graphs and Tensors</div>
+      <div class="extra">University of California San Diego · San Diego, CA</div>
+    </div>
+
+    <!-- <div class="cv-date">2023</div>
+    <div class="cv-content">
+      <div class="role">Graph Neural Networks Are More Powerful Than We Think</div>
+      <div class="extra">Oklahoma State University · virtual</div>
+    </div> -->
+
+    <!-- <div class="cv-date">2023</div>
+    <div class="cv-content">
+      <div class="role">Representation Learning on Heterogeneous Data</div>
+      <div class="extra">University of Georgia · Athens, GA</div>
+    </div> -->
+
+    <!-- <div class="cv-date">2023</div>
+    <div class="cv-content">
+      <div class="role">Graph Neural Networks Are More Powerful Than We Think</div>
+      <div class="extra">University of Texas Rio Grande Valley · Edinburg, TX</div>
+    </div> -->
+
+    <div class="cv-date">2023</div>
+    <div class="cv-content">
+      <div class="role">Graph Neural Networks Are More Powerful Than We Think</div>
+      <div class="extra">Information Theory and Applications Workshop · San Diego, CA</div>
+    </div>
+
+    <div class="cv-date">2021</div>
+    <div class="cv-content">
+      <div class="role">Tensor Completion from Regular Sub-Nyquist Samples</div>
+      <div class="extra">IEEE Signal Processing Society Webinar Series · virtual</div>
+    </div>
+
+    <div class="cv-date">2020</div>
+    <div class="cv-content">
+      <div class="role">Learning from Multimodal Data</div>
+      <div class="extra">Alexa Group, Amazon Inc. · Pittsburgh, PA</div>
+    </div>
+
+    <div class="cv-date">2020</div>
+    <div class="cv-content">
+      <div class="role">Learning from Multimodal Data</div>
+      <div class="extra">University of Southern California · Los Angeles, CA</div>
+    </div>
+
+    <div class="cv-date">2020</div>
+    <div class="cv-content">
+      <div class="role">Graph Representation Learning via Tensor Methods</div>
+      <div class="extra">University of Pennsylvania · Philadelphia, PA</div>
+    </div>
+
+    <div class="cv-date">2020</div>
+    <div class="cv-content">
+      <div class="role">Hyperspectral Super-resolution: A Tensor Factorization Approach</div>
+      <div class="extra">IEEE RAS Technical Committee on Agricultural Robotics and Automation · virtual</div>
+    </div>
+
+    <div class="cv-date">2019</div>
+    <div class="cv-content">
+      <div class="role">Tensor Completion from Regular Samples</div>
+      <div class="extra">Cognitive Computing Lab, Baidu Inc. · Seattle, WA</div>
+    </div>
+
+    <div class="cv-date">2018</div>
+    <div class="cv-content">
+      <div class="role">Factorization Methods for Natural Language Processing</div>
+      <div class="extra">Arm Inc. · Austin, TX</div>
+    </div>
+
+  </div>
+
+  <!-- ============================ TEACHING ============================ -->
+  <h2 class="cv-section">Teaching</h2>
+  <div class="cv-list">
+
+    <div class="cv-date">2024 &ndash; present</div>
+    <div class="cv-content">
+      <div class="role">Instructor, Stanford University</div>
+      <div class="extra"><a href="https://web.stanford.edu/class/cs224w/" target="_blank" rel="noopener">CS224W: Machine Learning with Graphs</a> and <a href="https://web.stanford.edu/class/cs246/" target="_blank" rel="noopener">CS246: Mining Massive Datasets</a> (with Jure Leskovec).</div>
+    </div>
+
+    <div class="cv-date">2022 &ndash; 2023</div>
+    <div class="cv-content">
+      <div class="role">Instructor, University of Pennsylvania</div>
+      <div class="extra"><a href="https://gnn.seas.upenn.edu/" target="_blank" rel="noopener">ESE5140: Graph Neural Networks</a>.</div>
+    </div>
+
+  </div>
+
+  <!-- ============================ SERVICE ============================ -->
+  <h2 class="cv-section">Community Service</h2>
+
+  <p class="service-block">
+    <strong>Area Chair:</strong> ICML Workshops, AAAI Conference on Artificial Intelligence, ACM KDD Conference.
+  </p>
+  <p class="service-block">
+    <strong>Reviewer:</strong> NeurIPS, ICLR, ICML, KDD, ACL, IEEE Transactions on Signal Processing.
+  </p>
+
+</main>
+
+<footer class="site">
+  &copy; 2026 Charilaos I. Kanatsoulis
+</footer>
+
+<script>
+  (function () {
+    var btn = document.getElementById('theme-toggle');
+    if (!btn) return;
+    btn.addEventListener('click', function () {
+      var current = document.documentElement.getAttribute('data-theme') === 'dark' ? 'dark' : 'light';
+      var next = current === 'dark' ? 'light' : 'dark';
+      document.documentElement.setAttribute('data-theme', next);
+      try { localStorage.setItem('theme', next); } catch (e) {}
+    });
+  })();
+</script>
+
+</body>
+</html>
