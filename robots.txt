@@ -1,4 +1,4 @@
 User-agent: *
 Disallow:
 
-Sitemap: https://ckanatsoulis.github.io/al-folio/sitemap.xml
+Sitemap: https://ckanatsoulis.github.io/sitemap.xml
